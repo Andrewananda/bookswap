@@ -1,0 +1,25 @@
+require_relative '../node_modules/react-native/scripts/react_native_pods'
+require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
+
+platform :ios, '10.0'
+
+target 'bookswap' do
+  config = use_native_modules!
+
+  use_react_native!(:path => config["reactNativePath"])
+
+  target 'bookswapTests' do
+    inherit! :complete
+    # Pods for testing
+  end
+
+end
+
+target 'bookswap-tvOS' do
+  # Pods for bookswap-tvOS
+
+  target 'bookswap-tvOSTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+end
