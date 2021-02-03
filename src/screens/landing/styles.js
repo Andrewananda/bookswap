@@ -1,9 +1,4 @@
 export default {
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: '30%',
-  },
   textCenter: {
     textAlign: 'center',
     margin: 10,
@@ -11,16 +6,16 @@ export default {
     fontSize: 16,
   },
   button: {
-    backgroundColor: '#db2f2f',
+    backgroundColor: '#0053cf',
     justifyContent: 'center',
-    width: 250,
+    width: 300,
     height: 40,
     borderRadius: 20,
     borderWidth: 1,
   },
   heading: {
     fontSize: 20,
-    color: 'red',
+    color: '#bac2ff',
     fontWeight: 'bold',
   },
 };

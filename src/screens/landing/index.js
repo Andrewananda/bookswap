@@ -6,13 +6,22 @@ import styles from './styles';
 class Landing extends Component {
   render() {
     return (
-      <View style={styles.container}>
+      <View
+        style={[
+          {
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: '#4e90fe',
+          },
+        ]}>
         <Text style={styles.heading}>BookSwap</Text>
         <Text style={styles.textCenter}>
           Welcome To Bookswap where you get all the learning materials you need.
         </Text>
         <View style={{padding: 20}}>
-          <Pressable onPress={() => this.props.navigation.navigate('SignInScreen')}>
+          <Pressable
+            onPress={() => this.props.navigation.navigate('SignInScreen')}>
             <View style={styles.button}>
               <Text
                 style={{
@@ -26,8 +35,9 @@ class Landing extends Component {
           </Pressable>
         </View>
         <View style={{paddingTop: 5}}>
-          <Pressable onPress={() => this.props.navigation.navigate('SignUpScreen')}>
-            <View style={[styles.button, {backgroundColor: '#fff'}]}>
+          <Pressable
+            onPress={() => this.props.navigation.navigate('SignUpScreen')}>
+            <View style={[styles.button, {backgroundColor: '#bac2ff'}]}>
               <Text
                 style={{
                   color: '#000',

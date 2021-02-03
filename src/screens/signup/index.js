@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Pressable, SafeAreaView, Text, View, TextInput} from 'react-native';
-import {Form, Item} from 'native-base';
 import styles from '../signin/styles';
 import NetInfo from '@react-native-community/netinfo';
 import {TOAST} from '../../util';
