@@ -20,7 +20,7 @@ export default class BookDetailScreen extends Component {
               <View>
                 <Card style={styles.imageCardStyle}>
                   <Image
-                    source={require('../../assets/logo.png')}
+                    source={require('../../../assets/logo.png')}
                     style={styles.imageStyle}
                   />
                 </Card>

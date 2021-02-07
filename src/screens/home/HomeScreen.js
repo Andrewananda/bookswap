@@ -1,9 +1,16 @@
 import React from 'react';
-import {View, Text, ScrollView, SafeAreaView} from 'react-native';
+import {
+  View,
+  Text,
+  ScrollView,
+  SafeAreaView,
+  TextInput,
+  StyleSheet,
+} from 'react-native';
 import {Card} from 'native-base';
-import SearchComponent from '../components/SearchComponent';
-import GridItemComponent from '../components/GridItemComponent';
-import ListItemComponent from '../components/ListItemComponent';
+import ListItemComponent from '../../components/ListItemComponent';
+import MaterialCommunityIcons from 'react-native-vector-icons/FontAwesome5';
+import ShimmerGridItem from '../../components/ShimmerGridItem';
 
 function HomeScreen(props) {
   return (
@@ -16,8 +23,23 @@ function HomeScreen(props) {
           backgroundColor: '#081491',
         }}>
         <View>
-          <View style={{margin: 10, padding: 10}}>
-            <SearchComponent />
+          <View style={{margin: 5, padding: 5}}>
+            <View style={{justifyContent: 'center', alignItems: 'center'}}>
+              <View style={styles.searchSection}>
+                <MaterialCommunityIcons
+                  style={styles.searchIcon}
+                  name="search"
+                  size={16}
+                />
+                <TextInput
+                  placeholderTextColor="#fff"
+                  placeholder={'What would you like to read?'}
+                  style={styles.input}
+                  returnKeyType={'search'}
+                  onSubmitEditing={() => alert('Hello world')}
+                />
+              </View>
+            </View>
           </View>
           <View style={{margin: 10, padding: 10}}>
             <Text
@@ -29,16 +51,14 @@ function HomeScreen(props) {
               }}>
               New Collection
             </Text>
-            <View style={{paddingTop: 15}}>
-              <ScrollView
-                horizontal={true}
-                showsHorizontalScrollIndicator={false}>
-                <GridItemComponent />
-                <GridItemComponent />
-                <GridItemComponent />
-                <GridItemComponent />
-              </ScrollView>
-            </View>
+            <ScrollView
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}>
+              <ShimmerGridItem visible={true} />
+              <ShimmerGridItem visible={true} />
+              <ShimmerGridItem visible={true} />
+              <ShimmerGridItem visible={true} />
+            </ScrollView>
           </View>
         </View>
         <View
@@ -99,7 +119,7 @@ function HomeScreen(props) {
               padding: 10,
             }}>
             <View>
-              <ScrollView style={{marginBottom: 230, paddingBottom: 260}}>
+              <ScrollView style={{marginBottom: 200, paddingBottom: 260}}>
                 <View>
                   <ListItemComponent
                     onPress={() => props.navigation.navigate('BookDetail')}
@@ -140,3 +160,27 @@ function HomeScreen(props) {
 }
 
 export default HomeScreen;
+const styles = StyleSheet.create({
+  searchSection: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: '#fff',
+    borderRadius: 10,
+    width: 250,
+  },
+  searchIcon: {
+    padding: 10,
+    color: '#fff',
+  },
+  input: {
+    flex: 1,
+    paddingTop: 10,
+    paddingRight: 10,
+    paddingBottom: 10,
+    paddingLeft: 0,
+    color: '#fff',
+    backgroundColor: 'transparent',
+  },
+});

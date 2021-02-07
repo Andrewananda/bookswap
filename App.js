@@ -9,12 +9,14 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import Authenticated from './src/routes/authenticated';
-import NonAuthenticated from './src/routes/non-authenticated';
 import {Root} from 'native-base';
+import SignInScreen from './src/screens/signin/SignInScreen';
+import SignUpScreen from './src/screens/signup';
+import MainTabStack from './src/appNavigation/MainTabStack';
+import Landing from './src/screens/landing';
+import SplashScreen from './src/splashscreen';
 
 const Stack = createStackNavigator();
-const isLoggedIn = false;
 
 const App: () => React$Node = () => {
   return (
@@ -24,13 +26,28 @@ const App: () => React$Node = () => {
           <Stack.Navigator>
             <Stack.Screen
               options={{headerShown: false}}
-              name={'Root'}
-              component={NonAuthenticated}
+              name={'SplashScreen'}
+              component={SplashScreen}
+            />
+            <Stack.Screen
+              options={{headerShown: false}}
+              name={'Landing'}
+              component={Landing}
+            />
+            <Stack.Screen
+              options={{headerShown: false}}
+              name={'SignInScreen'}
+              component={SignInScreen}
+            />
+            <Stack.Screen
+              options={{headerShown: false}}
+              name={'SignUpScreen'}
+              component={SignUpScreen}
             />
             <Stack.Screen
               options={{headerShown: false}}
               name={'Authenticated'}
-              component={Authenticated}
+              component={MainTabStack}
             />
           </Stack.Navigator>
         </NavigationContainer>

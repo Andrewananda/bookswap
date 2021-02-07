@@ -159,6 +159,24 @@ class SignUpScreen extends Component {
                 </Text>
               </View>
             </Pressable>
+            <Text>
+              <Text style={{padding: 10}}>Already have an account?</Text>
+              <Pressable
+                onPress={() => this.props.navigation.navigate('SignInScreen')}>
+                <View>
+                  <Text
+                    style={{
+                      color: 'blue',
+                      paddingTop: 10,
+                      marginTop: 5,
+                      fontSize: 15,
+                      paddingLeft: 10,
+                    }}>
+                    Sign In
+                  </Text>
+                </View>
+              </Pressable>
+            </Text>
           </View>
         </View>
       </SafeAreaView>
