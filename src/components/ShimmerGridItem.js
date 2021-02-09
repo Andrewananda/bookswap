@@ -17,7 +17,7 @@ export default function ShimmerGridItem(props) {
             pauseDuration={200}>
             <Image
               style={styles.imageStyle}
-              source={require('../../assets/logo.png')}
+              source={{uri: props.data.frontCover}}
             />
           </Shimmer>
           <View style={{flexDirection: 'column', padding: 10}}>
@@ -27,7 +27,9 @@ export default function ShimmerGridItem(props) {
               visible={props.visible}
               autoRun={true}
               style={{width: 120}}>
-              <Text style={{color: '#a9a9a9', fontSize: 16}}>Title</Text>
+              <Text numberOfLines={2} style={{color: '#a9a9a9', fontSize: 16}}>
+                {props.data.title}
+              </Text>
             </Shimmer>
             <View style={{paddingTop: 10}}>
               <Shimmer
@@ -36,8 +38,10 @@ export default function ShimmerGridItem(props) {
                 visible={props.visible}
                 autoRun={true}
                 style={{width: 120}}>
-                <Text style={{fontSize: 18, fontWeight: 'bold'}}>
-                  Description
+                <Text
+                  numberOfLines={3}
+                  style={{fontSize: 18, fontWeight: 'bold'}}>
+                  {props.data.description}
                 </Text>
               </Shimmer>
             </View>
