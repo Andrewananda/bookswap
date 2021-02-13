@@ -24,7 +24,11 @@ function ListItemComponent(props) {
             visible={props.visible}
             pauseDuration={200}>
             <Image
-              source={{uri: props.data.frontCover}}
+              source={{
+                uri: props.data.frontCover
+                  ? props.data.frontCover
+                  : props.data.icon,
+              }}
               style={{height: 120, width: 120, resizeMode: 'center'}}
             />
           </Shimmer>
@@ -57,7 +61,7 @@ function ListItemComponent(props) {
             <Text
               style={{fontWeight: 'bold', fontSize: 18, paddingTop: 5}}
               numberOfLines={1}>
-              {props.data.title}
+              {props.data.title ? props.data.title : props.data.slug}
             </Text>
           </Shimmer>
           <Shimmer
@@ -68,9 +72,11 @@ function ListItemComponent(props) {
             visible={props.visible}
             pauseDuration={200}>
             <Text style={{color: '#a9a9a9', fontSize: 16, paddingTop: 10}}>
-              {props.data.author}
+              {props.data.author
+                ? props.data.author
+                : 'Books remaining: ' + props.data.countBooks}
             </Text>
-          </Shimmer> 
+          </Shimmer>
         </View>
         <View style={{paddingTop: 50, margin: 10}}>
           <MaterialCommunityIcons name="greater-than" />
