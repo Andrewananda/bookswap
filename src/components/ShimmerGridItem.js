@@ -1,13 +1,13 @@
 import React from 'react';
-import {Image, Text, View, StyleSheet} from 'react-native';
+import {Image, Text, View, StyleSheet, Pressable} from 'react-native';
 import Shimmer from '../util/Shimmer';
 import {Card} from 'native-base';
 
 export default function ShimmerGridItem(props) {
   return (
     <View style={{padding: 5}}>
-      <Card style={{borderRadius: 10, width: 155, padding: 10}}>
-        <View>
+      <Card style={{borderRadius: 10, width: 155, padding: 10, height: 180}}>
+        <Pressable onPress={props.onPress}>
           <Shimmer
             autoRun={true}
             animationOpacity={2}
@@ -40,13 +40,13 @@ export default function ShimmerGridItem(props) {
                 style={{width: 120}}>
                 <Text
                   numberOfLines={3}
-                  style={{fontSize: 18, fontWeight: 'bold'}}>
+                  style={{paddingBottom: 12, fontSize: 15, fontWeight: 'bold'}}>
                   {props.data.description}
                 </Text>
               </Shimmer>
             </View>
           </View>
-        </View>
+        </Pressable>
       </Card>
     </View>
   );

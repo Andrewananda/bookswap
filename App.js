@@ -15,6 +15,7 @@ import SignUpScreen from './src/screens/signup';
 import MainTabStack from './src/appNavigation/MainTabStack';
 import Landing from './src/screens/landing';
 import SplashScreen from './src/splashscreen';
+import BookDetailStack from './src/appNavigation/BookDetailStack';
 
 const Stack = createStackNavigator();
 
@@ -48,6 +49,11 @@ const App: () => React$Node = () => {
               options={{headerShown: false}}
               name={'Authenticated'}
               component={MainTabStack}
+            />
+            <Stack.Screen
+              options={{headerShown: false}}
+              name={'BookDetail'}
+              component={BookDetailStack}
             />
           </Stack.Navigator>
         </NavigationContainer>

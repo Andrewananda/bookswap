@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Image, Text, StyleSheet, Pressable} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/FontAwesome5';
+import Shimmer from '../util/Shimmer';
 
 function ListItemComponent(props) {
   return (
@@ -15,10 +16,18 @@ function ListItemComponent(props) {
           margin: 5,
         }}>
         <View style={{backgroundColor: props.coverColor, borderRadius: 10}}>
-          <Image
-            source={require('../../assets/logo.png')}
-            style={{height: 120, width: 120, resizeMode: 'center'}}
-          />
+          <Shimmer
+            autoRun={true}
+            animationOpacity={2}
+            direction={'UP'}
+            style={{height: 120, width: 120}}
+            visible={props.visible}
+            pauseDuration={200}>
+            <Image
+              source={{uri: props.data.frontCover}}
+              style={{height: 120, width: 120, resizeMode: 'center'}}
+            />
+          </Shimmer>
         </View>
         <View
           style={{
@@ -27,16 +36,41 @@ function ListItemComponent(props) {
             margin: 10,
             flex: 2,
           }}>
-          <Text style={{color: '#a9a9a9', fontSize: 16}}>Management</Text>
-          <Text
-            style={{fontWeight: 'bold', fontSize: 18, paddingTop: 5}}
-            numberOfLines={1}>
-            Show Your Work Show Your Work Show Your Work Show Your Work Show
-            Your
-          </Text>
-          <Text style={{color: '#a9a9a9', fontSize: 16, paddingTop: 10}}>
-            Andrew Ananda
-          </Text>
+          <Shimmer
+            autoRun={true}
+            animationOpacity={2}
+            direction={'UP'}
+            style={{width: 150, paddingTop: 5}}
+            visible={props.visible}
+            pauseDuration={200}>
+            <Text style={{color: '#a9a9a9', fontSize: 16}}>
+              {props.data.categoryName}
+            </Text>
+          </Shimmer>
+          <Shimmer
+            autoRun={true}
+            animationOpacity={2}
+            direction={'UP'}
+            style={{width: 150, paddingTop: 10}}
+            visible={props.visible}
+            pauseDuration={200}>
+            <Text
+              style={{fontWeight: 'bold', fontSize: 18, paddingTop: 5}}
+              numberOfLines={1}>
+              {props.data.title}
+            </Text>
+          </Shimmer>
+          <Shimmer
+            autoRun={true}
+            animationOpacity={2}
+            direction={'UP'}
+            style={{width: 150, paddingTop: 10}}
+            visible={props.visible}
+            pauseDuration={200}>
+            <Text style={{color: '#a9a9a9', fontSize: 16, paddingTop: 10}}>
+              {props.data.author}
+            </Text>
+          </Shimmer>
         </View>
         <View style={{paddingTop: 50, margin: 10}}>
           <MaterialCommunityIcons name="greater-than" />

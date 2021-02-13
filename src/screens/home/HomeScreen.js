@@ -12,7 +12,7 @@ import ListItemComponent from '../../components/ListItemComponent';
 import MaterialCommunityIcons from 'react-native-vector-icons/FontAwesome5';
 import ShimmerGridItem from '../../components/ShimmerGridItem';
 import {handleApi} from '../../util/network';
-import {API_FEATURED_BOOKS} from '../../util/constants';
+import {API_FEATURED_BOOKS, API_LATEST} from '../../util/constants';
 import {hashValue, TOAST} from '../../util';
 import NetInfo from '@react-native-community/netinfo';
 
@@ -23,11 +23,14 @@ class HomeScreen extends Component {
       isLoading: true,
       showGridData: false,
       results: false,
+      categories: false,
+      showCategories: false,
     };
   }
 
   componentDidMount() {
     this.loadData();
+    this.loadCategories();
   }
 
   loadData() {
@@ -44,7 +47,6 @@ class HomeScreen extends Component {
           'POST',
           params,
           function (response) {
-            console.log('response', response);
             if (response.message === 'Successful') {
               _this.setState({results: response.result});
               _this.setState({showGridData: true});
@@ -61,20 +63,25 @@ class HomeScreen extends Component {
     });
   }
 
-  featuredData() {
-    if (this.state.results) {
-      this.state.results.data.map((item, index) => (
-        <ShimmerGridItem visible={this.state.showGridData} />
-      ));
-    } else {
-      return (
-        <View style={{flexDirection: 'row'}}>
-          <ShimmerGridItem visible={this.state.showGridData} />
-          <ShimmerGridItem visible={this.state.showGridData} />
-          <ShimmerGridItem visible={this.state.showGridData} />
-        </View>
-      );
-    }
+  loadCategories() {
+    const hash = hashValue().value;
+    let params = {
+      hashedKey: hash,
+      pageNumber: 1,
+      order: '0',
+    };
+    NetInfo.fetch().then((status) => {
+      if (status.isConnected) {
+        let _this = this;
+        handleApi(API_LATEST, 'POST', params, function (response) {
+          _this.setState({categories: response.result.data});
+          _this.setState({showCategories: true});
+        }),
+          function (error) {
+            console.log('Error', error);
+          };
+      }
+    });
   }
 
   render() {
@@ -123,6 +130,10 @@ class HomeScreen extends Component {
                   this.state.results.data.map((item, index) => (
                     <ShimmerGridItem
                       data={item}
+                      key={index}
+                      onPress={() =>
+                        this.props.navigation.navigate('BookDetail')
+                      }
                       visible={this.state.showGridData}
                     />
                   ))
@@ -205,36 +216,43 @@ class HomeScreen extends Component {
               <View>
                 <ScrollView style={{marginBottom: 200, paddingBottom: 260}}>
                   <View>
-                    <ListItemComponent
-                      onPress={() =>
-                        this.props.navigation.navigate('BookDetail')
-                      }
-                      coverColor="#CCACA7"
-                    />
-                    <ListItemComponent
-                      onPress={() => alert('Second')}
-                      coverColor="#CCACA7"
-                    />
-                    <ListItemComponent
-                      onPress={() => alert('Third')}
-                      coverColor="#A1B2FA"
-                    />
-                    <ListItemComponent
-                      onPress={() => alert('Forth')}
-                      coverColor="#A1B2FA"
-                    />
-                    <ListItemComponent
-                      onPress={() => alert('Fifth')}
-                      coverColor="#728955"
-                    />
-                    <ListItemComponent
-                      onPress={() => alert('Sixth')}
-                      coverColor="#728955"
-                    />
-                    <ListItemComponent
-                      onPress={() => alert('Seventh')}
-                      coverColor="#728955"
-                    />
+                    {this.state.categories ? (
+                      this.state.categories.map((item, index) => (
+                        <ListItemComponent
+                          key={index}
+                          data={item}
+                          visible={this.state.showCategories}
+                          onPress={() =>
+                            this.props.navigation.navigate('BookDetail')
+                          }
+                          coverColor="#CCACA7"
+                        />
+                      ))
+                    ) : (
+                      <View>
+                        <ListItemComponent
+                          visible={this.state.showCategories}
+                          data={false}
+                          coverColor="#CCACA7"
+                        />
+                        <ListItemComponent
+                          visible={this.state.showCategories}
+                          data={false}
+                          onPress={() =>
+                            this.props.navigation.navigate('BookDetail')
+                          }
+                          coverColor="#CCACA7"
+                        />
+                        <ListItemComponent
+                          visible={this.state.showCategories}
+                          data={false}
+                          onPress={() =>
+                            this.props.navigation.navigate('BookDetail')
+                          }
+                          coverColor="#CCACA7"
+                        />
+                      </View>
+                    )}
                   </View>
                 </ScrollView>
               </View>
