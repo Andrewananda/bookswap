@@ -70,7 +70,7 @@ function ListItemComponent(props) {
             <Text style={{color: '#a9a9a9', fontSize: 16, paddingTop: 10}}>
               {props.data.author}
             </Text>
-          </Shimmer>
+          </Shimmer> 
         </View>
         <View style={{paddingTop: 50, margin: 10}}>
           <MaterialCommunityIcons name="greater-than" />
